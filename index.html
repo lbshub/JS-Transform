@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>transform (matrix2d matrix3d) 矩阵变换</title>
+	<style>
+		/*body{perspective: 200px;}*/
+		.test{ position: absolute; left: 300px; top: 100px; width: 100px; height: 100px; background: #000; font-size: 12px; color: #fff; line-height: 1.8;}
+		button{margin: 0 10px;}
+	</style>
+</head>
+<body>
+	<div class="test"></div>
+	
+	<div class="btns">
+		<button>translateX</button><button>translateY</button><button>translateZ</button>
+		<br><br>
+		<button>scaleX</button><button>scaleY</button><button>scaleZ</button>
+		<br><br>
+		<button>rotateX</button><button>rotateY</button><button>rotateZ</button>
+		<br><br>
+		<button>skewX</button><button>skewY</button> 
+		<br><br>
+		<button>originX</button><button>originY</button><button>originZ</button>
+		<br><br>
+		<button>reset</button>
+		<br><br>
+		<button>start</button><button>pause</button><button>stop</button>
+	</div>
+
+	<script src="transform.min.js"></script>  
+	<script>
+
+		var el  = document.querySelector('.test'),
+			btns = document.querySelector('.btns'),
+			easing = function(k){
+				return Math.sqrt(1 - Math.pow(k - 1, 2));
+			};
+		Transform.watch(el);
+		btns.addEventListener('click', function(e) {
+			var target = e.target;
+			if (target.tagName.toLowerCase() === 'button') {
+				switch (target.textContent){
+					case 'translateX':
+						el.innerHTML += 'translateX=200 </br>';
+						// Transform.animate(el, {translateX: 200});
+						Transform.animate(el, {
+							translateX: 200
+						}, {
+							duration: 500,
+							ease: easing,
+							change: function(el, prop, currentValue) {
+								console.log('当前的[' + prop + ']值： ' + currentValue);
+							},
+							callback: function() {
+								console.log('动画完成');
+							}
+						});
+					break;
+					case 'translateY':
+						el.innerHTML += 'translateY=200</br>';
+						Transform.animate(el, {translateY: 200});
+					break;
+					case 'translateZ':
+						el.innerHTML += 'translateZ=200</br>';
+						Transform.animate(el, {translateZ: 200});
+					break;
+					case 'scaleX':
+						el.innerHTML += 'scaleX=2</br>';
+						Transform.animate(el, {scaleX: 2});
+					break;
+					case 'scaleY':
+						el.innerHTML += 'scaleY=2</br>';
+						Transform.animate(el, {scaleY: 2});
+					break;
+					case 'scaleZ':
+						el.innerHTML += 'scaleZ=2</br>';
+						Transform.animate(el, {scaleZ: 2});
+					break;
+					case 'rotateX':
+						el.innerHTML += 'rotateX=405</br>';
+						Transform.animate(el, {rotateX: 405}, 1000);
+					break;
+					case 'rotateY':
+						el.innerHTML += 'rotateY=405</br>';
+						Transform.animate(el, {rotateY: 405}, 1000);
+					break;
+					case 'rotateZ':
+						el.innerHTML += 'rotateZ=405</br>';
+						Transform.animate(el, {rotateZ: 405}, 1000);
+					break;
+					case 'skewX':
+						el.innerHTML += 'skewX=45</br>';
+						Transform.animate(el, {skewX: 45}, 600);
+					break;
+					case 'skewY':
+						el.innerHTML += 'skewY=60</br>';
+						Transform.animate(el, {skewY: 60}, 600);
+					break;
+					case 'originX':
+						el.innerHTML += 'originX="left"</br>';
+						el.originX = 'left';
+					break;
+					case 'originY':
+						el.innerHTML += 'originY="top"</br>';
+						el.originY = 'top';
+					break;
+					case 'originZ':
+						el.innerHTML += 'originZ="10px"</br>';
+						el.originZ = '10px';
+					break;
+					case 'reset':
+						Transform.stop(el);
+						el.innerHTML = '';
+						el.translateX = el.translateY = el.translateZ = 0;
+						el.scaleX = el.scaleY = el.scaleZ = 1;
+						el.rotateX = el.rotateY = el.rotateZ = 0;
+						el.skewX = el.skewY = 0;
+						el.originX = el.originY = 'center';
+						el.originZ = '0px';
+					break;
+					case 'start':
+						Transform.animate(el, {translateX: 600, translateY: 100}, 3000, easing, function() {
+							console.log('移动完成');
+						});
+						Transform.animate(el, {rotateZ: 3000}, 5000, easing, function() {
+							console.log('旋转完成');
+						});
+					break;
+					case 'pause':
+						Transform.stop(el);
+					break;
+					case 'stop':
+						Transform.stop(el, true);
+					break;
+				};
+			}
+		});
+	</script>
+</body>
+</html>
