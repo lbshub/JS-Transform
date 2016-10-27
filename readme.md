@@ -1,6 +1,7 @@
 # JS-Transform 
 简单的(css3 transform) 矩阵变换动画封装
 
+-----------------------------------------
 ### Transform.watch(el)
 开始监控el元素的变换属性，自动判断matrix或者matrix3d支持
 
@@ -21,7 +22,7 @@ el.skewX = 50;
 el.rotateX = 90;
 
 ```
-
+-----------------------------------------
 ### Transform.animate(el, props, opts)
 在元素上使用动画 如未开启属性监控则自动调用Transform.watch(el)
 

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+	<title>mFinger test</title>
+	<style>
+		*{margin: 0; padding: 0;}
+		html, body{width: 100%; height: 100%;}
+		.wrapper, .scroller{width: 100%; height: 100%;}
+		.wrapper{position: relative; overflow: hidden; background: #000;}
+		.scroller{ position: absolute; left: 0; top: 0; overflow: hidden;}
+		.scroller li{width: 100%; height: 100%; display: table; float: left; list-style: none;}
+		.scroller li span{ display: table-cell; text-align: center; vertical-align: middle; }
+		.scroller li span img{ width: 100%; vertical-align:middle;}
+	</style>
+</head>
+<body>
+	
+	<div class="wrapper">
+		<ul class="scroller">
+			<li><span><img src="01.jpg" /></span></li>
+			<li><span><img src="02.jpg" /></span></li>
+			<li><span><img src="03.jpg" /></span></li>
+			<li><span><img src="04.jpg" /></span></li>
+		</ul>
+	</div>
+
+	<script src="../transform.min.js"></script>
+	<script src="mFinger.min.js"></script>
+	<script src="mView.js"></script>
+	<script>
+		new mView('.wrapper');
+	</script>
+</body>
+</html>
